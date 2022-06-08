@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -22,15 +21,12 @@ y;
  * The Vely.
  */
 vely = 0 ;
-   private Elements elements;
+   private final Elements elements;
     /**
      * The Ss.
      */
     protected SpriteSheet ss;
-    /**
-     * The Hp.
-     */
-    public int hp  =100 ;
+
 
     /**
      * Instantiates a new Game object.
@@ -66,6 +62,7 @@ vely = 0 ;
      *
      * @return the bounds
      */
+    // detecting collision between objects
     public abstract Rectangle getBounds();
 
     /**
@@ -78,66 +75,12 @@ vely = 0 ;
     }
 
     /**
-     * Sets x.
-     *
-     * @param x the x to set
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
      * Gets y.
      *
      * @return the y
      */
     public int getY() {
         return y;
-    }
-
-    /**
-     * Sets y.
-     *
-     * @param y the y to set
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
-     * Gets velx.
-     *
-     * @return the velx
-     */
-    public float getVelx() {
-        return velx;
-    }
-
-    /**
-     * Sets velx.
-     *
-     * @param velx the velx to set
-     */
-    public void setVelx(float velx) {
-        this.velx = velx;
-    }
-
-    /**
-     * Gets vely.
-     *
-     * @return the vely
-     */
-    public float getVely() {
-        return vely;
-    }
-
-    /**
-     * Sets vely.
-     *
-     * @param vely the vely to set
-     */
-    public void setVely(float vely) {
-        this.vely = vely;
     }
 
     /**
@@ -149,17 +92,5 @@ vely = 0 ;
         return elements;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param elements the id to set
-     */
-    public void setId(Elements elements) {
-        this.elements = elements;
-    }
-    
-    
-    
-    
-    
+
 }

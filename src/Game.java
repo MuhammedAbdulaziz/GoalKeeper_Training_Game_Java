@@ -72,7 +72,7 @@ public class Game extends Canvas implements Runnable
     {
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
+        double amountOfTicks = 120.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0 ;
         long timer = System.currentTimeMillis();
@@ -98,6 +98,7 @@ public class Game extends Canvas implements Runnable
     /**
      * Tick.
      */
+    // updating the game frames
     public void tick ()
         {
             for(int i = 0 ; i < handler.object.size(); i++ ) {
@@ -136,6 +137,9 @@ public class Game extends Canvas implements Runnable
      */
     public void render()
         {
+
+            //pre loading the frames like loading 3 frames before rendering if we increase it won't matter cause
+            // we can't notice anything after 3
             BufferStrategy bs = this.getBufferStrategy();
             if (bs == null)
             {
@@ -154,7 +158,7 @@ public class Game extends Canvas implements Runnable
                     g.drawImage(map, xx, yy, null);
                 }
             }
-           
+           // to render them above the map
             handler.render(g);
             handler1.render(g);
             handler2.render(g);

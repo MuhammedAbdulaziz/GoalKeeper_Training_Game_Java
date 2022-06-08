@@ -1,6 +1,7 @@
 /**
  * The enum Elements.
  */
+// id for each object in our game
 public enum Elements
 {
     /**
@@ -30,19 +31,5 @@ public enum Elements
     /**
      * Ball 1 elements.
      */
-    Ball1(),
-    /**
-     * Ball 2 elements.
-     */
-    Ball2(),
-    /**
-     * Ball 3 elements.
-     */
-    Ball3(),
-    /**
-     * Enemy elements.
-     */
     Enemy();
-        
-    
 }

@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -6,6 +5,8 @@ import java.util.LinkedList;
 /**
  * The type Handler.
  */
+
+// updating every game object
 public class Handler
 {
 
@@ -20,7 +21,9 @@ public class Handler
 	 */
 	public void tick() {
 		for (int i = 0; i < object.size(); i++) {
+			//storing each object temporary then get the id of each one which is i
 			GameObject tempObject = object.get(i);
+			//calling .tick to update each object in our list
 			tempObject.tick();
 		}
 	}
@@ -30,10 +33,10 @@ public class Handler
 	 *
 	 * @param g the g
 	 */
+	// same as tick
 	public void render(Graphics g) {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
-
 			tempObject.render(g);
 		}
 	}
