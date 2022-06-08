@@ -58,6 +58,8 @@ public class Shooter extends GameObject
             {
                 if (getBounds().intersects(tempObject.getBounds()))
                 {
+                    // make the player stop when it hit the block and get rebound by -1 velocity if it 0 or
+                    //more it's going to pass the block less than -1 it going rebound faster
                     x+= velx* -1 ;
                     y+= vely *-1;
                                         

@@ -7,7 +7,6 @@ import java.util.Random;
  * The type Goal keeper.
  */
 public class GoalKeeper extends GameObject {
-    private final Game game;
     /**
      * The R.
      */
@@ -43,13 +42,11 @@ public class GoalKeeper extends GameObject {
      * @param elements the elements
      * @param handler  the handler
      * @param ss       the ss
-     * @param game     the game
      */
-    public GoalKeeper(int x, int y, Elements elements, Handler handler, SpriteSheet ss , Game game) {
+    public GoalKeeper(int x, int y, Elements elements, Handler handler, SpriteSheet ss) {
         super(x, y, elements,ss);
         this.handler = handler ;
         enemy_image = ss.grabImage(4, 1, 32, 32);
-        this.game = game;
     }
 
     @Override
@@ -66,11 +63,14 @@ public class GoalKeeper extends GameObject {
             {
                 if ( getBoundsBig().intersects(tempObject.getBounds()))
                 {
+                    // if it hit rebound by double of the speed
                     x += (velx*2)* -1;
                     y += (vely*2)* -1;
+                    // make it not going through the wall
                     velx *= -1 ;
                     vely *= -1;
                 }
+                // if not bounding choose different direction
                 else if (choose == 0 )
         {
             vely = r.nextInt((10 + 10) - 10);

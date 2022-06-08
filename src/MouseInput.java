@@ -49,6 +49,7 @@ public class MouseInput extends MouseAdapter
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObject = handler.object.get(i);
             if (tempObject.getId() == Elements.Player) {
+                // if we didn't add 16.24 it going to shoot from center of the player
                 handler.addObject(new Ball(tempObject.getX() + 16, tempObject.getY() + 24, Elements.Ball, handler, mx, my, ss));
 
             }

@@ -1,5 +1,4 @@
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -40,19 +39,16 @@ public class Game extends Canvas implements Runnable
         BufferedImageLoader loader = new BufferedImageLoader();
         BufferedImage level = loader.loadImage("/game_level.png");
         BufferedImage sprite_sheet = loader.loadImage("/player_images.png");
-        
+        // if we didn't do that its going to null
         ss =new SpriteSheet(sprite_sheet);
         map= ss.grabImage(4, 2, 32, 32);
         
         this.addMouseListener(new MouseInput(handler , camera , ss,this));
-        this.addMouseListener(new MouseInput(handler1 , camera , ss,this));
-        this.addMouseListener(new MouseInput(handler2 , camera , ss,this));
-        this.addMouseListener(new MouseInput(handler3 , camera , ss,this));
-       
       loadLevel(level);
     }
     private void start()
     {
+
         isRunning=true;
         thread = new Thread(this);
         thread.start();
@@ -92,6 +88,7 @@ public class Game extends Canvas implements Runnable
                 timer+=1000;
             }
         }
+
         stop();
     }
 
@@ -101,6 +98,7 @@ public class Game extends Canvas implements Runnable
     // updating the game frames
     public void tick ()
         {
+            // looping through our objects finding where are they and move our camera
             for(int i = 0 ; i < handler.object.size(); i++ ) {
                 if(handler.object.get(i).getId() == Elements.Player)
                 {
@@ -146,31 +144,34 @@ public class Game extends Canvas implements Runnable
                 this.createBufferStrategy(3);
                 return;
             }
+
+
+
             Graphics g = bs.getDrawGraphics();
+            // make our graphics 2D
             Graphics2D g2d = (Graphics2D) g;
             //////////////////////////////////////
-            g2d.translate(-camera.getX() , -camera.getY());
-            
-            for(int xx = 0 ; xx<32*100 ; xx+=32 )
+            // render the camera first if it + it work but rendering going make
+            //xx+=32 because it's our map width and height
+            // *50 or anything above it work and render idk why it doesn't on less
+            for(int xx = 0 ; xx<32*50 ; xx+=32)
             {
-                for(int yy= 0 ; yy<32*100; yy+=32)
+                for(int yy= 0 ; yy<32*50; yy+=32)
                 {
                     g.drawImage(map, xx, yy, null);
                 }
             }
-           // to render them above the map
-            handler.render(g);
-            handler1.render(g);
-            handler2.render(g);
-            handler3.render(g);
+            g2d.translate(-camera.getX() , -camera.getY());
+            System.out.println(""+thread.getName());
+
+               // to render them above the map
+                handler.render(g);
+                handler1.render(g);
+                handler2.render(g);
+                handler3.render(g);
             
-              g2d.translate(camera.getX() , camera.getY());
-               g.setColor(Color.green);
-                g.setColor(Color.white);
+                g2d.translate(camera.getX() , camera.getY());
                 g.drawString("Balls Blocked  :"+ GoalKeeper.balls_blocked ,10,70);
-                g.setColor(Color.white);
-                g.setColor(Color.white);
-                g.setColor(Color.white);
             /////////////////////////////////////
             g.dispose();
             bs.show();
@@ -186,7 +187,7 @@ public class Game extends Canvas implements Runnable
                 {
                     int pixel = image.getRGB(xx, yy);
                   
-                    int red = (pixel >> 16 )& 0xff;
+                    int red = (pixel>> 16)& 0xff;
                     int green = (pixel>>8) & 0xff;
                     int blue = (pixel )& 0xff;
                     if (red == 255)
@@ -198,7 +199,7 @@ public class Game extends Canvas implements Runnable
                         handler3.addObject(new Shooter(xx*38 ,yy*38 , Elements.Player3,handler3,ss));
                     }
                     if(green ==255)
-                        handler.addObject(new GoalKeeper(xx*32 , yy*32 , Elements.Enemy , handler,ss, this));
+                        handler.addObject(new GoalKeeper(xx*32 , yy*32 , Elements.Enemy , handler,ss));
                 }
             }
         }
@@ -212,6 +213,7 @@ public class Game extends Canvas implements Runnable
     {
         Game t = new Game();
         t.start();
+        System.out.println(""+t.getName());
     }
 }
 
